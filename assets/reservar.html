@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Reserva de Mesas - Churrascaria São Martinho</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* Variables CSS (tomadas de tu página principal) */
+        :root {
+            --vermelho: #7A1F1F;
+            --cinza: #333333;
+            --cinza-claro: #f9f9f9;
+            --branco: #ffffff;
+            /* Nuevas variables para el plano */
+            --plano-bg-claro: rgba(255, 255, 255, 0.9); /* Fondo del área del plano */
+            --mesa-disponivel: rgba(236, 220, 222, 0.7); /* Color base de la mesa disponible */
+            --mesa-hover-borda: var(--vermelho); /* Borde al pasar el ratón */
+            --mesa-hover-texto: var(--branco); /* Texto al pasar el ratón */
+            --mesa-reservado-bg: var(--vermelho); /* Fondo mesa reservada */
+            --mesa-reservado-texto: var(--branco); /* Texto mesa reservada */
+            --borda-sala: 2px dashed rgba(122, 31, 31, 0.5); /* Borde sutil para la sala */
+            --transicao-rapida: 0.2s ease-in-out;
+            --transicao-lenta: 0.4s ease-in-out;
+            --sombra-elegante: 0 8px 20px rgba(0, 0, 0, 0.15); /* Sombra para el plano */
+            --sombra-mesa: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra para las mesas */
+        }
+
+        /* Reseteo básico y estilos del cuerpo */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--cinza-claro);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 1rem;
+            margin: 0;
+            color: var(--cinza);
+            min-height: 100vh;
+            justify-content: center;
+            overflow-x: hidden; /* Evita scroll horizontal en caso de desbordamiento */
+        }
+
+        h1 {
+            margin-bottom: 3rem;
+            color: var(--vermelho);
+            user-select: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 3.2rem; /* Título más grande */
+            text-align: center;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Sombra sutil para el título */
+        }
+
+        .main-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px; /* Ancho máximo para el wrapper principal */
+            padding: 1.5rem; /* Padding para el wrapper */
+        }
+
+        .floor-plan-area {
+            position: relative; /* Contenedor para posicionar mesas */
+            width: 100%;
+            height: 650px; /* Altura fija para el área del plano */
+            background: linear-gradient(135deg, var(--plano-bg-claro) 0%, rgba(255, 255, 255, 0.8) 100%);
+            border-radius: 15px;
+            box-shadow: var(--sombra-elegante);
+            overflow: hidden; /* Para que las mesas no se salgan del borde si se posicionan afuera */
+            padding: 2rem; /* Espacio dentro del plano */
+            display: flex; /* Usamos flexbox para ayudar a organizar */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sala-area {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            width: 70%; /* Ajustado para el diseño del plano */
+            height: 70%; /* Ajustado para el diseño del plano */
+            border: var(--borda-sala);
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.5); /* Fondo más transparente */
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(80px, 1fr)); /* 3 columnas */
+            grid-template-rows: repeat(4, auto); /* 4 filas para las mesas de la sala */
+            gap: 2rem 3rem; /* Espacio entre mesas */
+            align-content: start;
+            justify-content: center;
+        }
+        /* Posicionamiento específico de mesas dentro de la sala (ajuste fino para replicar el dibujo) */
+        .mesa-119 { grid-column: 1; grid-row: 2; }
+        .mesa-120 { grid-column: 2; grid-row: 2; }
+        .mesa-121 { grid-column: 3; grid-row: 2; }
+        .mesa-113 { grid-column: 4; grid-row: 2; } /* esta mesa esta fuera del grid de 3 columnas, se ajustara en responsive */
+        .mesa-114 { grid-column: 1; grid-row: 3; }
+        .mesa-116 { grid-column: 2; grid-row: 3; }
+        .mesa-118 { grid-column: 3; grid-row: 3; }
+
+
+        .esplanada-area {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 30%; /* Ajustado para el diseño del plano */
+            height: 80%; /* Ajustado para el diseño del plano */
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: flex-end; /* Alinea las mesas a la derecha de la esplanada */
+            justify-content: flex-end; /* Alinea las mesas hacia abajo de la esplanada */
+        }
+        .esplanada-vertical-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .esplanada-horizontal-group {
+            display: flex;
+            flex-direction: row; /* Mesas en fila */
+            gap: 1.5rem;
+        }
+
+
+        /* Estilos de los botones de mesa */
+        .table-button {
+            width: 90px; /* Tamaño ligeramente más grande */
+            height: 90px;
+            background-color: var(--mesa-disponivel);
+            border: 2px solid rgba(0, 0, 0, 0.05); /* Borde muy sutil */
+            border-radius: 10px; /* Esquinas suaves */
+            box-shadow: var(--sombra-mesa);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--cinza);
+            transition: all var(--transicao-rapida);
+            font-weight: 500;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.05rem;
+            user-select: none;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Mesas rectangulares */
+        .table-button.rectangular {
+            width: 140px; /* Más ancho */
+            height: 90px; /* Misma altura */
+        }
+
+        /* Efecto de borde al hacer hover */
+        .table-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 3px solid var(--mesa-hover-borda); /* Color del borde al hover */
+            border-radius: inherit;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all var(--transicao-rapida);
+        }
+
+        .table-button:hover:not(.reservado) {
+            color: var(--mesa-hover-texto);
+            transform: translateY(-5px); /* Efecto de levantamiento */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al hover */
+        }
+
+        .table-button:hover:not(.reservado)::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Contenido de la mesa para que esté por encima del pseudo-elemento */
+        .table-button .table-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 5px; /* Pequeño padding interno */
+            width: 100%;
+            height: 100%;
+        }
+
+        .table-button span.table-capacity {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 0.2rem;
+        }
+
+        /* Estilos de las mesas reservadas */
+        .table-button.reservado {
+            background-color: var(--mesa-reservado-bg);
+            color: var(--mesa-reservado-texto);
+            cursor: default;
+            box-shadow: 0 0 20px rgba(185, 74, 74, 0.9); /* Sombra roja intensa */
+            pointer-events: none;
+            transform: none !important;
+            animation: pulse-red 1s infinite alternate; /* Animación de pulsación para reservado */
+        }
+        .table-button.reservado::after {
+            display: none; /* Oculta el borde hover en reservado */
+        }
+        .table-button.reservado span.table-capacity {
+            display: none; /* Oculta la capacidad en mesas reservadas */
+        }
+
+        @keyframes pulse-red {
+            from { box-shadow: 0 0 10px rgba(185, 74, 74, 0.7); }
+            to { box-shadow: 0 0 25px rgba(185, 74, 74, 1.2); }
+        }
+
+
+        /* Botón de reset */
+        button#reset-reservas {
+            background-color: var(--vermelho);
+            color: var(--branco);
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 2.5rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: background-color var(--transicao-rapida), transform var(--transicao-rapida), box-shadow var(--transicao-rapida);
+            user-select: none;
+            margin-top: 3rem; /* Más espacio superior */
+            letter-spacing: 1px;
+            font-size: 1.15rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button#reset-reservas:hover {
+            background-color: #9b2b2b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .floor-plan-area {
+                height: auto; /* Altura automática en pantallas más pequeñas */
+                flex-direction: column; /* Apila Sala y Esplanada verticalmente */
+                gap: 2rem;
+                padding: 1.5rem;
+            }
+
+            .sala-area, .esplanada-area {
+                position: static; /* Restaura el posicionamiento estático */
+                width: 100%; /* Ocupa todo el ancho disponible */
+                height: auto; /* Altura automática */
+                padding: 1rem;
+                border-radius: 8px;
+            }
+            .sala-area {
+                grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); /* Más flexible */
+                gap: 1.2rem;
+            }
+            /* Ajuste de mesas rectangulares en móvil si es necesario */
+            .table-button.rectangular {
+                width: 110px;
+                height: 70px;
+            }
+            .table-button {
+                width: 70px;
+                height: 70px;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+            }
+            .floor-plan-area {
+                padding: 1rem;
+            }
+            .sala-area {
+                gap: 1rem;
+            }
+            .table-button {
+                width: 60px;
+                height: 60px;
+                font-size: 0.85rem;
+                border-radius: 8px;
+            }
+            .table-button.rectangular {
+                width: 100px;
+                height: 60px;
+            }
+            button#reset-reservas {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Faça a Sua Reserva</h1>
+
+    <div class="main-wrapper">
+        <div class="floor-plan-area" aria-label="Plano de mesas do restaurante">
+            <div class="sala-area" aria-label="Área da Sala Principal">
+                <button class="table-button" data-id="100" data-capacity="4"><span class="table-content"><span class="table-number">Mesa 100</span><span class="table-capacity">(4 p.)</span></span></button>
+                <button class="table-button" data-id="122" data-capacity="2"><span class="table-content"><span class="table-number">Mesa 122</span><span class="table-capacity">(2 p.)</span></span></button>
+                <button class="table-button rectangular" data-id="123" data-capacity="6"><span class="table-content"><span class="table-number">Mesa 123</span><span class="table-capacity">(6 p.)</span></span></button>
+
+                <button class="table-button" data-id="119" data-capacity="4"><span class="table-content"><span class="table-number">Mesa 119</span><span class="table-capacity">(4 p.)</span></span></button>
+                <button class="table-button" data-id="120" data-capacity="8"><span class="table-content"><span class="table-number">Mesa 120</span><span class="table-capacity">(8 p.)</span></span></button>
+                <button class="table-button rectangular" data-id="121" data-capacity="6"><span class="table-content"><span class="table-number">Mesa 121</span><span class="table-capacity">(6 p.)</span></span></button>
+                <button class="table-button" data-id="113" data-capacity="2"><span class="table-content"><span class="table-number">Mesa 113</span><span class="table-capacity">(2 p.)</span></span></button> <button class="table-button" data-id="114" data-capacity="4"><span class="table-content"><span class="table-number">Mesa 114</span><span class="table-capacity">(4 p.)</span></span></button>
+                <button class="table-button rectangular" data-id="116" data-capacity="6"><span class="table-content"><span class="table-number">Mesa 116</span><span class="table-capacity">(6 p.)</span></span></button>
+                <button class="table-button rectangular" data-id="118" data-capacity="8"><span class="table-content"><span class="table-number">Mesa 118</span><span class="table-capacity">(8 p.)</span></span></button>
+            </div>
+
+            <div class="esplanada-area" aria-label="Área da Esplanada">
+                <div class="esplanada-vertical-group">
+                    <button class="table-button" data-id="124" data-capacity="4"><span class="table-content"><span class="table-number">Mesa 124</span><span class="table-capacity">(4 p.)</span></span></button>
+                    <button class="table-button" data-id="125" data-capacity="4"><span class="table-content"><span class="table-number">Mesa 125</span><span class="table-capacity">(4 p.)</span></span></button>
+                    <button class="table-button" data-id="126" data-capacity="4"><span class="table-content"><span class="table-number">Mesa 126</span><span class="table-capacity">(4 p.)</span></span></button>
+                </div>
+                <div class="esplanada-horizontal-group">
+                    <button class="table-button" data-id="101" data-capacity="2"><span class="table-content"><span class="table-number">Mesa 101</span><span class="table-capacity">(2 p.)</span></span></button>
+                    <button class="table-button" data-id="102" data-capacity="4"><span class="table-content"><span class="table-number">Mesa 102</span><span class="table-capacity">(4 p.)</span></span></button>
+                    <button class="table-button" data-id="103" data-capacity="2"><span class="table-content"><span class="table-number">Mesa 103</span><span class="table-capacity">(2 p.)</span></span></button>
+                    <button class="table-button" data-id="104" data-capacity="4"><span class="table-content"><span class="table-number">Mesa 104</span><span class="table-capacity">(4 p.)</span></span></button>
+                </div>
+            </div>
+        </div>
+
+        <button id="reset-reservas" aria-label="Limpar todas as reservas">Limpar reservas</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mesas = document.querySelectorAll('.table-button');
+            const resetBtn = document.getElementById('reset-reservas');
+
+            // Cargar estado de reservas desde localStorage al iniciar
+            function loadReservations() {
+                const reservedTables = JSON.parse(localStorage.getItem('reservedTables')) || [];
+                mesas.forEach(mesa => {
+                    const mesaId = mesa.getAttribute('data-id');
+                    if (reservedTables.includes(mesaId)) {
+                        mesa.classList.add('reservado');
+                        mesa.querySelector('.table-number').textContent = 'Reservado';
+                        if (mesa.querySelector('.table-capacity')) {
+                            mesa.querySelector('.table-capacity').style.display = 'none'; // Ocultar capacidad en reservado
+                        }
+                    }
+                });
+            }
+
+            // Guardar estado de reservas en localStorage
+            function saveReservations() {
+                const reservedTables = [];
+                mesas.forEach(mesa => {
+                    if (mesa.classList.contains('reservado')) {
+                        reservedTables.push(mesa.getAttribute('data-id'));
+                    }
+                });
+                localStorage.setItem('reservedTables', JSON.stringify(reservedTables));
+            }
+
+            // Inicializar las reservas al cargar la página
+            loadReservations();
+
+            mesas.forEach(mesa => {
+                mesa.addEventListener('click', () => {
+                    if(mesa.classList.contains('reservado')) return; // No hacer nada si ya está reservado
+
+                    mesa.classList.add('reservado');
+                    mesa.querySelector('.table-number').textContent = 'Reservado';
+                    if (mesa.querySelector('.table-capacity')) {
+                        mesa.querySelector('.table-capacity').style.display = 'none';
+                    }
+                    saveReservations(); // Guardar el cambio
+                });
+            });
+
+            resetBtn.addEventListener('click', () => {
+                mesas.forEach(mesa => {
+                    mesa.classList.remove('reservado');
+                    const originalId = mesa.getAttribute('data-id');
+                    const originalCapacity = mesa.getAttribute('data-capacity');
+                    mesa.querySelector('.table-number').textContent = `Mesa ${originalId}`;
+                    if (mesa.querySelector('.table-capacity')) {
+                        mesa.querySelector('.table-capacity').textContent = `(${originalCapacity} p.)`;
+                        mesa.querySelector('.table-capacity').style.display = 'inline'; // Mostrar capacidad de nuevo
+                    }
+                });
+                saveReservations(); // Guardar el reset
+            });
+        });
+    </script>
+
+</body>
+</html>

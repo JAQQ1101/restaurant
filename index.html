@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Churrascaria de São Martinho</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    :root {
+      --vermelho: #7A1F1F;
+      --cinza: #333333;
+      --cinza-claro: #f8f8f8;
+      --branco: #ffffff;
+      --preto-solido: #141414;
+      --preto-transparente: rgba(20, 20, 20, 0.85);
+      --blur-effect: blur(10px);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--cinza);
+      background-color: var(--branco);
+      line-height: 1.6;
+    }
+    body.no-scroll { overflow: hidden; }
+
+    /* --- Header --- */
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 4rem; background-color: transparent;
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      transition: background-color 0.4s ease-out, padding 0.4s ease-out;
+    }
+    header.scrolled {
+      background-color: var(--preto-transparente);
+      backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect);
+      padding: 1rem 4rem; box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .logo {
+      font-family: 'Poppins', sans-serif; font-weight: 700;
+      /* Tamaño ajustado para el nombre completo */
+      font-size: 1.8rem; 
+      color: var(--branco); letter-spacing: 1.5px;
+      position: absolute; left: 50%; transform: translateX(-50%);
+      white-space: nowrap; /* Evita que el nombre se parta en dos líneas */
+    }
+    .header-left, .header-right { display: flex; align-items: center; gap: 1rem; z-index: 1002; }
+    .menu-toggle {
+      width: 30px; height: 22px; position: relative; cursor: pointer;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .menu-toggle span { display: block; height: 3px; width: 100%; background: var(--branco); border-radius: 5px; transition: .3s ease-in-out; }
+    .menu-toggle.active span { background: var(--branco); }
+    .menu-toggle.active span:nth-child(1) { transform: translateY(9.5px) rotate(135deg); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; transform: translateX(-20px); }
+    .menu-toggle.active span:nth-child(3) { transform: translateY(-9.5px) rotate(-135deg); }
+    
+    /* Menú Overlay */
+    nav {
+      position: fixed; inset: 0;
+      background-color: rgba(0,0,0,0.3);
+      backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect);
+      z-index: 1001; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+    }
+    nav.active {
+      opacity: 1; visibility: visible;
+      transition: opacity 0.4s ease;
+    }
+    nav a {
+      color: var(--branco); font-family: 'Poppins', sans-serif;
+      font-size: clamp(2rem, 8vw, 2.8rem); font-weight: 700;
+      margin: 1rem 0; text-decoration: none; text-transform: uppercase;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    
+    /* --- Estructura General --- */
+    /* La línea 'padding-top' ha sido eliminada de 'main' para corregir la franja blanca */
+    .section { padding: 6rem 0; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .section-title { font-family: 'Poppins', sans-serif; font-size: 2.8rem; font-weight: 700; color: var(--vermelho); margin-bottom: 3rem; text-align: center; }
+    
+    /* Hero Section */
+    .hero { position: relative; height: 100vh; display: flex; justify-content: center; align-items: center; color: var(--branco); text-align: center; overflow: hidden; }
+    .hero-background { position: absolute; inset: 0; z-index: 1; background-image: url(assets/fondo.jpg); background-size: cover; background-position: center; transform: scale(1.1); }
+    .hero::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.6); z-index: 2; }
+    .hero-content { position: relative; z-index: 3; padding: 0 1rem; }
+    .hero-content h1 { font-family: 'Poppins', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: clamp(3rem, 10vw, 7rem); line-height: 1.1; }
+    .hero-content p { font-size: clamp(1.1rem, 2.5vw, 1.4rem); margin: 1.5rem auto 2.5rem auto; max-width: 600px; }
+    .btn-reserva { background-color: var(--branco); color: var(--vermelho); border: none; padding: 1.2rem 3.5rem; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.1rem; cursor: pointer; border-radius: 4px; text-transform: uppercase; letter-spacing: 2px; transition: background-color 0.3s ease, transform 0.3s ease; text-decoration: none; }
+    .btn-reserva:hover { background-color: #f2dede; transform: translateY(-3px); }
+
+    /* Otras Secciones */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; }
+    .about-grid img { width: 100%; border-radius: 12px; }
+    .text-content p { margin-bottom: 1rem; line-height: 1.8; }
+    #menulink { background-color: var(--cinza-claro); text-align: center; overflow: hidden; }
+    #menulink .container p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 2.5rem auto; }
+    .btn-primary { background-color: var(--vermelho); color: var(--branco); border: none; padding: 1.2rem 3.5rem; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.1rem; cursor: pointer; border-radius: 4px; text-transform: uppercase; letter-spacing: 2px; transition: background-color 0.3s ease, transform 0.3s ease; text-decoration: none; display: inline-block; }
+    .btn-primary:hover { background-color: #a33a3a; transform: translateY(-3px); }
+    .anim-reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+    .anim-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    #menulink .section-title { transition-delay: 0.1s; }
+    #menulink p { transition-delay: 0.2s; }
+    #menulink .btn-primary { transition-delay: 0.3s; }
+    #menu { padding: 0; }
+    .menu-showcase-panel { position: relative; height: 90vh; display: flex; justify-content: center; align-items: center; text-align: center; color: var(--branco); overflow: hidden; }
+    .panel-bg-parallax { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; z-index: 1; }
+    .panel-bg-parallax::after { content: ''; position: absolute; inset: 0; background-color: rgba(0,0,0,0.5); }
+    .panel-content { position: relative; z-index: 2; padding: 2rem; opacity: 0; transform: scale(0.95); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+    .menu-showcase-panel.is-visible .panel-content { opacity: 1; transform: scale(1); }
+    .panel-content h2 { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: clamp(4rem, 12vw, 8rem); line-height: 1; text-transform: uppercase; text-shadow: 0px 4px 15px rgba(0,0,0,0.5); }
+    .panel-content p { font-size: clamp(1.1rem, 2.5vw, 1.4rem); max-width: 500px; margin: 1rem auto 0 auto; text-shadow: 0px 2px 8px rgba(0,0,0,0.5); }
+    #contacto { background-color: var(--branco); }
+    .contacto-info { text-align: center; font-size: 1.1rem; }
+    footer { background-color: var(--preto-solido); color: var(--branco); text-align: center; padding: 3rem 1rem; }
+    @media (max-width: 768px) { header, header.scrolled { padding: 1rem 1.5rem; } .logo { font-size: 1.2rem; } .about-grid { grid-template-columns: 1fr; } .panel-bg-parallax { background-attachment: scroll; } }
+  </style>
+</head>
+<body>
+
+<header id="pageHeader">
+  <div class="header-left">
+    <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+  </div>
+  <div class="logo">Churrascaria de São Martinho</div>
+  <div class="header-right"></div>
+</header>
+
+<nav id="mainNav">
+  <a href="#sobrenos">Sobre Nós</a>
+  <a href="#gastronomia">Gastronomia</a>
+  <a href="menu.html">Menu Completo</a>
+  <a href="#contacto">Contacto</a>
+</nav>
+
+<main>
+    <section class="hero">
+      <div class="hero-background"></div>
+      <div class="hero-content">
+        <h1>Sabores autênticos da Madeira</h1>
+        <p>Desfrute da melhor churrascaria com o toque tradicional e moderno que nos caracteriza.</p>
+        <a href="assets/reservar.html" class="btn-reserva">Reservar Mesa</a>
+      </div>
+    </section>
+
+    <section id="sobrenos" class="section">
+        <div class="container">
+          <h2 class="section-title">Sobre Nós</h2>
+          <div class="about-grid">
+            <div class="text-content"><p>Bem-vindo à Churrascaria São Martinho, um tesouro culinário no coração do Funchal. Nascido da paixão pelas tradições da Madeira e pelo sabor autêntico do churrasco, o nosso restaurante é um ponto de encontro para famílias e amigos.</p></div>
+            <div class="image-content"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=2787&auto=format&fit=crop" alt="Cozinheiro a preparar comida"></div>
+          </div>
+        </div>
+    </section>
+
+    <section id="gastronomia" class="section" style="background-color: var(--cinza-claro);">
+        <div class="container">
+          <h2 class="section-title">Nossa Gastronomia</h2>
+          <div class="about-grid">
+            <div class="image-content"><img src="https://images.unsplash.com/photo-1543353071-873f17a7a088?q=80&w=2940&auto=format&fit=crop" alt="Ingredientes frescos"></div>
+            <div class="text-content"><p>A nossa cozinha celebra a riqueza da terra e do mar da Madeira. Do nosso famoso frango de churrasco à suculenta espetada em pau de louro, cada prato é uma homenagem à autêntica cozinha madeirense, reinventada com uma abordagem moderna e criativa.</p></div>
+          </div>
+        </div>
+    </section>
+
+    <section id="menulink" class="section">
+        <div class="container">
+            <h2 class="section-title anim-reveal">O Nosso Menu</h2>
+            <p class="anim-reveal">Explore a nossa seleção completa de pratos, bebidas e sobremesas. Deixe-se tentar pelos sabores da Madeira.</p>
+            <a href="assets/menu.html" class="btn-primary anim-reveal">Ver Menu Completo</a>
+        </div>
+    </section>
+</main>
+
+<section id="menu">
+    <div class="menu-showcase-panel">
+        <div class="panel-bg-parallax" style="background-image: url('assets/img2.png');"></div>
+        <div class="panel-content"><h2>Picanha</h2><p>Carne macia e suculenta, perfeita para os amantes de churrasco.</p></div>
+    </div>
+    <div class="menu-showcase-panel">
+        <div class="panel-bg-parallax" style="background-image: url('assets/img1.png');"></div>
+        <div class="panel-content"><h2>Entrecosto</h2><p>Costelinhas assadas com temperos tradicionais da Madeira.</p></div>
+    </div>
+    <div class="menu-showcase-panel">
+        <div class="panel-bg-parallax" style="background-image: url('assets/img3.png');"></div>
+        <div class="panel-content"><h2>Doses</h2><p>Batatas, saladas frescas e molhos especiais para complementar.</p></div>
+    </div>
+    <div class="menu-showcase-panel">
+        <div class="panel-bg-parallax" style="background-image: url('assets/img4.png');"></div>
+        <div class="panel-content"><h2>Frango</h2><p>Frango grelhado com temperos aromáticos e saborosos.</p></div>
+    </div>
+    <div class="menu-showcase-panel">
+        <div class="panel-bg-parallax" style="background-image: url('assets/img10.png');"></div>
+        <div class="panel-content"><h2>Espetada</h2><p>Espetinhos tradicionais da Madeira, preparados na brasa.</p></div>
+    </div>
+    <div class="menu-showcase-panel">
+        <div class="panel-bg-parallax" style="background-image: url('assets/img11.png');"></div>
+        <div class="panel-content"><h2>Bolo do Caco</h2><p>Pão típico da Madeira, servido com manteiga de alho.</p></div>
+    </div>
+</section>
+
+<div id="contacto-wrapper">
+    <section id="contacto" class="section">
+        <div class="container">
+          <h2 class="section-title">Contacto</h2>
+          <div class="contacto-info">
+            <p>Caminho Igreja Nova 5, Funchal, Madeira</p>
+            <p>Horário: 12:00 – 23:00</p>
+            <p>Telefone: +351 123 456 789</p>
+          </div>
+        </div>
+    </section>
+</div>
+
+<footer>
+  <p>&copy; 2025 Churrascaria São Martinho - Todos os direitos reservados</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const pageHeader = document.getElementById('pageHeader');
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    
+    // Lógica del Header que cambia con el scroll
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            pageHeader.classList.add('scrolled');
+        } else {
+            pageHeader.classList.remove('scrolled');
+        }
+    });
+
+    // Lógica para el menú móvil
+    function openMenu() {
+        mainNav.classList.add('active');
+        menuToggle.classList.add('active');
+        document.body.classList.add('no-scroll');
+    }
+
+    function closeMenu() {
+        mainNav.classList.remove('active');
+        menuToggle.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+    }
+
+    menuToggle.addEventListener('click', () => {
+        if (mainNav.classList.contains('active')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    mainNav.addEventListener('click', (e) => {
+        if (e.target === mainNav) {
+            closeMenu();
+        }
+    });
+
+    mainNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape" && mainNav.classList.contains('active')) {
+            closeMenu();
+        }
+    });
+
+    // Lógica para animación de scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.menu-showcase-panel, .anim-reveal').forEach(el => observer.observe(el));
+});
+</script>
+
+</body>
+</html>

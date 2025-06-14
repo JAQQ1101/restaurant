@@ -1,0 +1,107 @@
+/* Paleta de cores baseada na imagem fornecida:
+   - Vermelho escuro (vinho): #6F1E1E
+   - Cinza elegante: #6E6E6E
+   - Branco: #FFFFFF (mantido como base)
+*/
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #FFFFFF;
+  color: #6E6E6E;
+}
+
+.navbar {
+  background-color: #6F1E1E;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.navbar .logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #D9B3B3;
+}
+
+.hero {
+  background: linear-gradient(rgba(111, 30, 30, 0.6), rgba(110, 110, 110, 0.6)), url('https://cdn.prod.rexby.com/image/87121a95-ec85-40b0-8760-7842b5936049?format=webp&width=1080&height=1350') no-repeat center center;
+  background-size: cover;
+  color: white;
+  text-align: center;
+  padding: 8rem 2rem;
+}
+
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  color: #D9B3B3;
+}
+
+.section {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #6F1E1E;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background-color: #F9F9F9;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #EEE;
+}
+
+footer {
+  background-color: #6E6E6E;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 2.2rem;
+  }
+  .section {
+    padding: 2rem 1rem;
+  }
+}
