@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Churrascaria de São Martinho | A Arte do Fogo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header id="pageHeader">
+    <div class="header-left">
+      <div class="language-switcher">
+        <button id="lang-toggle" class="lang-button">PT <i class="fas fa-chevron-down fa-xs"></i></button>
+        <ul id="lang-menu" class="lang-menu">
+          <li><a href="#pt" data-lang="pt" class="lang-option active">Português</a></li>
+          <li><a href="#en" data-lang="en" class="lang-option">English</a></li>
+          <li><a href="#es" data-lang="es" class="lang-option">Español</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="logo">Churrascaria</div>
+    <div class="header-right">
+      </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero">
+      <video playsinline autoplay muted loop poster="assets/img00.png" class="hero-video-background">
+        <source src="assets/video1.mp4" type="video/mp4">
+        <source src="assets/video1.webm" type="video/webm">
+        O seu navegador não suporta vídeos HTML5.
+      </video>
+      <div class="hero-content">
+        <h1>Sabores Autênticos</h1>
+        <p>Desfrute da melhor churrascaria, onde o tradicional e o moderno se encontram para criar uma experiência única.</p>
+        <a href="#reservationModal" id="openModalBtn" class="btn btn-reserva">Reservar Mesa</a>
+      </div>
+    </section>
+
+    <div class="content-wrapper">
+      <section id="sobrenos" class="section">
+        <div class="container">
+          <h2 class="section-title">Sobre Nós</h2>
+          <div class="about-grid">
+            <div class="text-content anim-reveal">
+              <p><span>B</span>em-vindo à nossa churrascaria, um tesouro culinário nascido da paixão pelas tradições e pelo sabor autêntico do churrasco. O nosso restaurante é um ponto de encontro para famílias e amigos.</p>
+            </div>
+            <div class="image-content anim-reveal"><img src="assets/img00.png" alt="Cozinheiro a preparar comida" loading="lazy"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="localizacao" class="video-section">
+        <video playsinline autoplay muted loop poster="assets/sala1.jpg" class="video-section-background">
+          <source src="assets/video2.mp4" type="video/mp4">
+          O seu navegador não suporta vídeos HTML5.
+        </video>
+        <div class="video-section-overlay"></div>
+        <div class="video-section-content">
+          <h2 class="section-title anim-reveal">Onde Estamos</h2>
+          <p class="anim-reveal">Encontre o nosso refúgio gastronómico. Um espaço acolhedor espera por si.</p>
+        </div>
+      </section>
+
+      <section id="menulink" class="section">
+        <div class="container text-center">
+          <h2 class="section-title anim-reveal">O Nosso Menu</h2>
+          <p class="section-subtitle anim-reveal">Explore a nossa seleção completa de pratos, bebidas e sobremesas. Deixe-se tentar pelos sabores.</p>
+          <a href="assets/menu.html" target="_blank" class="btn btn-primary anim-reveal">Ver Menu Completo</a>
+        </div>
+      </section>
+    </div>
+
+    <section id="menu">
+        <div class="menu-showcase-panel">
+            <div class="panel-bg-parallax" style="background-image: url('assets/img10.png');"></div>
+            <div class="panel-content"><h2>Espetada</h2><p>A autêntica espetada madeirense em pau de louro.</p></div>
+        </div>
+        <div class="menu-showcase-panel">
+            <div class="panel-bg-parallax" style="background-image: url('assets/img2.png');"></div>
+            <div class="panel-content"><h2>Picanha</h2><p>Corte nobre, grelhado à perfeição para máxima suculência.</p></div>
+        </div>
+        <div class="menu-showcase-panel">
+            <div class="panel-bg-parallax" style="background-image: url('assets/img4.png');"></div>
+            <div class="panel-content"><h2>Frango Assado</h2><p>Frango de churrasco com o nosso tempero secreto.</p></div>
+        </div>
+        <div class="menu-showcase-panel">
+            <div class="panel-bg-parallax" style="background-image: url('assets/img1.png');"></div>
+            <div class="panel-content"><h2>Entrecosto</h2><p>Costelinhas de porco assadas lentamente com molho barbecue.</p></div>
+        </div>
+        <div class="menu-showcase-panel">
+            <div class="panel-bg-parallax" style="background-image: url('assets/img3.png');"></div>
+            <div class="panel-content"><h2>Acompanhamentos</h2><p>Os nossos acompanhamentos.</p></div>
+        </div>
+    </section>
+      
+    <div class="content-wrapper">
+      <section id="eventos" class="section">
+          <div class="container text-center">
+              <h2 class="section-title anim-reveal">Eventos e Celebrações</h2>
+              <p class="section-subtitle anim-reveal">O nosso espaço exclusivo no último piso é o cenário perfeito para as suas celebrações mais especiais. Com uma sala ampla e um terraço privado com vistas deslumbrantes, ofereça aos seus convidados uma experiência inesquecível.</p>
+              
+              <div class="event-carousel-wrapper anim-reveal">
+                  <button class="carousel-arrow prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+                  <div class="event-carousel" id="eventCarousel">
+                      <div class="carousel-slide">
+                          <img src="assets/sala1.jpg" alt="Sala de eventos interior" loading="lazy">
+                      </div>
+                      <div class="carousel-slide">
+                          <img src="assets/sala2.jpg" alt="Terraço da sala de eventos com vista" loading="lazy">
+                      </div>
+                  </div>
+                  <button class="carousel-arrow next" aria-label="Seguinte"><i class="fas fa-chevron-right"></i></button>
+                  <div class="carousel-dots" id="carouselDots"></div>
+              </div>
+
+              <a href="mailto:churrascariadesaomartinho@gmail.com?subject=Reserva de Sala para Evento" class="btn btn-primary anim-reveal" style="margin-top: 3rem;">Reservar Sala</a>
+          </div>
+      </section>
+
+      <section id="vinhos" class="video-section">
+          <video playsinline autoplay muted loop poster="assets/sala2.jpg" class="video-section-background">
+              <source src="assets/vinho1.mp4" type="video/mp4">
+              O seu navegador não suporta vídeos HTML5.
+          </video>
+          <div class="video-section-overlay"></div>
+          <div class="video-section-content">
+              <h2 class="section-title anim-reveal">A Nossa Garrafeira</h2>
+              <p class="anim-reveal">Uma seleção cuidada de vinhos que representam o melhor de Portugal, escolhidos para harmonizar na perfeição com a arte do nosso churrasco.</p>
+              <a href="assets/vinhos.html" target="_blank" class="btn btn-primary anim-reveal" style="margin-top: 2rem;">Carta de Vinhos</a>
+          </div>
+      </section>
+      
+      <footer id="pageFooterBottom">
+          <section id="contacto" class="section">
+              <div class="container">
+                  <h2 class="section-title">Contacto e Reservas</h2>
+                  <div class="contacto-info">
+                  <p>Caminho Igreja Nova, 5</p>
+                  <p><strong>Horário:</strong> 12:00 – 23:00</p>
+                  <p><strong>Telefone:</strong> +351 123 456 789</p>
+                  </div>
+              </div>
+          </section>
+          <div class="footer-bottom">
+              <div class="container">
+                  <p>&copy; 2025 Churrascaria de São Martinho - Todos os direitos reservados</p>
+              </div>
+          </div>
+      </footer>
+    </div>
+  </main>
+  
+  <div id="reservationModal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 class="modal-title">Reservar Mesa</h2>
+        <p class="modal-subtitle">Garanta o seu lugar no paraíso do sabor.</p>
+        <form id="reservationForm">
+            <div class="form-group">
+                <label for="guestName">Nome</label>
+                <input type="text" id="guestName" name="guestName" required>
+            </div>
+            <div class="form-group-inline">
+                <div class="form-group">
+                    <label for="reservationDate">Data</label>
+                    <input type="date" id="reservationDate" name="reservationDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="reservationTime">Hora</label>
+                    <input type="time" id="reservationTime" name="reservationTime" required>
+                </div>
+            </div>
+            <div class="form-group-inline">
+                <div class="form-group">
+                    <label for="guestCount">Nº de Pessoas</label>
+                    <input type="number" id="guestCount" name="guestCount" min="1" max="20" value="2" required>
+                </div>
+                 <div class="form-group">
+                    <label for="guestPhone">Telefone</label>
+                     <input type="tel" id="guestPhone" name="guestPhone" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary modal-btn">Confirmar Reserva</button>
+        </form>
+    </div>
+  </div>
+
+  <div id="successModal" class="modal-overlay">
+    <div class="success-content">
+        <svg class="checkmark-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
+        <h2 class="modal-title">Reserva Efetuada!</h2>
+        <p class="modal-subtitle">Obrigado! A sua mesa está à sua espera.</p>
+    </div>
+  </div>
+  
+ <a href="https://wa.me/351123456789" id="whatsapp-widget" target="_blank" aria-label="Contactar por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+ </a>
+
+ <script>
+ document.addEventListener('DOMContentLoaded', () => {
+    const pageHeader = document.getElementById('pageHeader');
+    const mainContent = document.getElementById('main-content');
+
+    // --- OBSERVER DO HEADER ---
+    const headerObserver = new IntersectionObserver((entries) => {
+        pageHeader.classList.toggle('scrolled', !entries[0].isIntersecting);
+    }, { rootMargin: "50px 0px 0px 0px" });
+    headerObserver.observe(mainContent);
+
+    // --- SELETOR DE IDIOMAS ---
+    const langToggle = document.getElementById('lang-toggle');
+    const langMenu = document.getElementById('lang-menu');
+    if (langToggle && langMenu) {
+        langToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langMenu.classList.toggle('active');
+        });
+        // Clicar fora fecha o menu de idiomas
+        window.addEventListener('click', () => {
+            if (langMenu.classList.contains('active')) {
+                langMenu.classList.remove('active');
+            }
+        });
+    }
+
+    // --- ANIMAÇÃO DE SCROLL REVEAL ---
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.anim-reveal').forEach(el => revealObserver.observe(el));
+
+    // --- CARROSSEL DE EVENTOS ---
+    const carouselWrapper = document.querySelector('.event-carousel-wrapper');
+    if (carouselWrapper) {
+        const carousel = document.getElementById('eventCarousel');
+        const slides = Array.from(carousel.children);
+        const dotsContainer = document.getElementById('carouselDots');
+        const prevButton = carouselWrapper.querySelector('.carousel-arrow.prev');
+        const nextButton = carouselWrapper.querySelector('.carousel-arrow.next');
+        
+        if (slides.length > 1) {
+            slides.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.classList.add('carousel-dot');
+                dot.addEventListener('click', () => goToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+            const dots = Array.from(dotsContainer.children);
+            let currentIndex = 0;
+            
+            const goToSlide = (index) => {
+                carousel.scrollTo({ left: slides[index].offsetLeft, behavior: 'smooth' });
+            };
+            
+            const updateCurrentIndex = () => {
+                currentIndex = Math.round(carousel.scrollLeft / slides[0].offsetWidth);
+                dots.forEach((dot, index) => dot.classList.toggle('active', index === currentIndex));
+            };
+
+            let scrollTimeout;
+            carousel.addEventListener('scroll', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(updateCurrentIndex, 100);
+            });
+            
+            prevButton.addEventListener('click', () => {
+                goToSlide(currentIndex === 0 ? slides.length - 1 : currentIndex - 1);
+            });
+
+            nextButton.addEventListener('click', () => {
+                goToSlide(currentIndex === slides.length - 1 ? 0 : currentIndex + 1);
+            });
+
+            dots[0].classList.add('active');
+        } else if (slides.length <= 1) {
+            prevButton.style.display = 'none';
+            nextButton.style.display = 'none';
+            dotsContainer.style.display = 'none';
+        }
+    }
+
+    // --- LÓGICA DO MODAL ---
+    const reservationModal = document.getElementById('reservationModal');
+    if (reservationModal) {
+        const successModal = document.getElementById('successModal');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = reservationModal.querySelector('.close-modal');
+        const reservationForm = document.getElementById('reservationForm');
+        const dateInput = document.getElementById('reservationDate');
+
+        const openModal = (e) => { e.preventDefault(); reservationModal.style.display = 'flex'; };
+        const closeModal = () => reservationModal.style.display = 'none';
+
+        if(openModalBtn) openModalBtn.addEventListener('click', openModal);
+        if(closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+        
+        reservationModal.addEventListener('click', (e) => {
+            if(e.target === reservationModal) closeModal();
+        });
+
+        if (dateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.setAttribute('min', today);
+        }
+
+        if(reservationForm) {
+            reservationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                closeModal();
+                successModal.style.display = 'flex';
+                setTimeout(() => successModal.style.display = 'none', 4000); 
+            });
+        }
+    }
+ });
+ </script>
+
+</body>
+</html>

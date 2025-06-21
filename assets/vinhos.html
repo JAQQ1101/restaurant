@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de Vinhos | Churrascaria de São</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           CONFIGURAÇÃO E ESTILOS BASE
+           ========================================================================== */
+        :root {
+          --vermelho: #7A1F1F;
+          --cinza: #333333;
+          --cinza-claro: #f8f8f8;
+          --branco: #ffffff;
+          --preto-solido: #141414;
+          --font-principal: 'Montserrat', sans-serif;
+          --font-titulos: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-principal);
+            background-color: #2a2a2a;
+            color: var(--cinza);
+            padding: 3rem 1rem;
+        }
+
+        .menu-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--branco);
+            padding: 3rem 4rem;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .main-title {
+            font-family: var(--font-titulos);
+            font-weight: 600;
+            font-size: 3.5rem;
+            text-align: center;
+            color: var(--vermelho);
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        .wine-category {
+            margin-bottom: 3rem;
+        }
+
+        .wine-category h2 {
+            font-family: var(--font-titulos);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--cinza);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid var(--cinza-claro);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .wine-region {
+            margin-bottom: 1.5rem;
+        }
+
+        .wine-region h3 {
+            font-family: var(--font-titulos);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--vermelho);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .wine-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .wine-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0.75rem 0;
+            border-bottom: 1px dotted var(--cinza-claro);
+            line-height: 1.4;
+        }
+        
+        .wine-list li:last-child {
+            border-bottom: none;
+        }
+
+        .wine-name {
+            font-weight: 500;
+            max-width: 80%;
+        }
+
+        .wine-price {
+            font-weight: 700;
+            white-space: nowrap;
+            padding-left: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            .menu-container {
+                padding: 2rem 1.5rem;
+            }
+            .main-title {
+                font-size: 2.5rem;
+            }
+            .wine-category h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-container">
+        <h1 class="main-title">Vinhos</h1>
+
+        <section class="wine-category">
+            <h2>Verde</h2>
+            <ul class="wine-list">
+                <li><span class="wine-name">Casal Garcia</span><span class="wine-price">14€</span></li>
+                <li><span class="wine-name">Conde Villar</span><span class="wine-price">18€</span></li>
+                <li><span class="wine-name">Conde Villar Alvarinho</span><span class="wine-price">24€</span></li>
+            </ul>
+        </section>
+
+        <section class="wine-category">
+            <h2>Rosé</h2>
+            <ul class="wine-list">
+                <li><span class="wine-name">Mateus</span><span class="wine-price">14€</span></li>
+            </ul>
+        </section>
+
+        <section class="wine-category">
+            <h2>Espumante</h2>
+            <ul class="wine-list">
+                <li><span class="wine-name">M&M Turquoise Bruto</span><span class="wine-price">14€</span></li>
+            </ul>
+        </section>
+
+        <section class="wine-category">
+            <h2>Meia Garrafa</h2>
+            <ul class="wine-list">
+                <li><span class="wine-name">Marquês de Borba - 2022 (Tinto)</span><span class="wine-price">9€</span></li>
+                <li><span class="wine-name">Monte Velho - 2022 (Tinto)</span><span class="wine-price">7€</span></li>
+                <li><span class="wine-name">Santa Vitória Versátil - 2022 (Tinto)</span><span class="wine-price">7€</span></li>
+                <li><span class="wine-name">Planalto - 2020 (Branco)</span><span class="wine-price">9€</span></li>
+                <li><span class="wine-name">Mateus - (Rosé)</span><span class="wine-price">7€</span></li>
+            </ul>
+        </section>
+
+        <section class="wine-category">
+            <h2>Vinhos Brancos</h2>
+            <div class="wine-region">
+                <h3>Douro</h3>
+                <ul class="wine-list">
+                    <li><span class="wine-name">Planalto - 2020</span><span class="wine-price">16€</span></li>
+                    <li><span class="wine-name">Tons</span><span class="wine-price">14€</span></li>
+                </ul>
+            </div>
+            <div class="wine-region">
+                <h3>Alentejo</h3>
+                <ul class="wine-list">
+                    <li><span class="wine-name">Marquês de Borba - Colheita 2023</span><span class="wine-price">18€</span></li>
+                    <li><span class="wine-name">Santa Vitória Seleção - 2023</span><span class="wine-price">20€</span></li>
+                    <li><span class="wine-name">Seiçal - Colheita 2019</span><span class="wine-price">24€</span></li>
+                    <li><span class="wine-name">Versátil - 2022</span><span class="wine-price">10€</span></li>
+                </ul>
+            </div>
+            <div class="wine-region">
+                <h3>Tejo</h3>
+                <ul class="wine-list">
+                    <li><span class="wine-name">Quinta da Lapa - 2022</span><span class="wine-price">13€</span></li>
+                </ul>
+            </div>
+            <div class="wine-region">
+                <h3>Setúbal</h3>
+                <ul class="wine-list">
+                    <li><span class="wine-name">Dona Ermelinda - 2020</span><span class="wine-price">12€</span></li>
+                    <li><span class="wine-name">João Pires - 2023</span><span class="wine-price">14€</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="wine-category">
+            <h2>Vinhos Tintos</h2>
+            <div class="wine-region">
+                <h3>Alentejo</h3>
+                <ul class="wine-list">
+                    <li><span class="wine-name">Infantes - 2017</span><span class="wine-price">22€</span></li>
+                    <li><span class="wine-name">Mariana - 2023</span><span class="wine-price">14€</span></li>
+                    <li><span class="wine-name">Marquês de Borba Colheita - 2022</span><span class="wine-price">19€</span></li>
+                    <li><span class="wine-name">Marquês de Borba Reserva Colheita - 2017</span><span class="wine-price">--€</span></li>
+                    <li><span class="wine-name">Monte dos Amigos Colheita - 2021</span><span class="wine-price">10€</span></li>
+                    <li><span class="wine-name">Monte Velho Colheita - 2022</span><span class="wine-price">10€</span></li>
+                    <li><span class="wine-name">Monte Velho Reserva Colheita - 2021</span><span class="wine-price">18€</span></li>
+                    <li><span class="wine-name">Montes de Lá Colheita - 2019</span><span class="wine-price">14€</span></li>
+                    <li><span class="wine-name">Olho de Mocho Colheita - 2019</span><span class="wine-price">32€</span></li>
+                    <li><span class="wine-name">Petit Virgo Colheita - 2020</span><span class="wine-price">18€</span></li>
+                    <li><span class="wine-name">Pimenta Colheita - 2020</span><span class="wine-price">14€</span></li>
+                    <li><span class="wine-name">Pouca Roupa - 2022</span><span class="wine-price">12€</span></li>
+                    <li><span class="wine-name">Rapariga da Quinta Reserva - 2021</span><span class="wine-price">22€</span></li>
+                    <li><span class="wine-name">Rapariga da Quinta Colheita Seleccionada - 2022</span><span class="wine-price">14€</span></li>
+                    <li><span class="wine-name">Reguengos Seleção - 2023</span><span class="wine-price">10€</span></li>
+                    <li><span class="wine-name">Santa Vitória Reserva - 2018</span><span class="wine-price">20€</span></li>
+                    <li><span class="wine-name">Santa Vitória Seleção - 2018</span><span class="wine-price">12€</span></li>
+                    <li><span class="wine-name">Segredos de São Miguel - 2023</span><span class="wine-price">12€</span></li>
+                    <li><span class="wine-name">Seiçal - 2017</span><span class="wine-price">24€</span></li>
+                    <li><span class="wine-name">Solar das Mouras de Arraiolos - 2020</span><span class="wine-price">10€</span></li>
+                    <li><span class="wine-name">T.N.T - 2018</span><span class="wine-price">16€</span></li>
+                    <li><span class="wine-name">Vinha do convento Limited Edition - 2017</span><span class="wine-price">--€</span></li>
+                    <li><span class="wine-name">Virgo - 2022</span><span class="wine-price">24€</span></li>
+                    <li><span class="wine-name">1808 Biológico - Reserva 2020</span><span class="wine-price">16€</span></li>
+                    <li><span class="wine-name">Aldeias de Juromenha - 2021</span><span class="wine-price">14€</span></li>
+                    <li><span class="wine-name">Cartuxa - 2017</span><span class="wine-price">38€</span></li>
+                    <li><span class="wine-name">Ciconia - Touriga Nacional 2021</span><span class="wine-price">12€</span></li>
+                    <li><span class="wine-name">Ciconia Reserva - 2022</span><span class="wine-price">18€</span></li>
+                    <li><span class="wine-name">Cinco forais reserva - 2017</span><span class="wine-price">22€</span></li>
+                    <li><span class="wine-name">Cortes da cima incógnito - 2013</span><span class="wine-price">--€</span></li>
+                    <li><span class="wine-name">Cortes da cima reserva - 2014</span><span class="wine-price">--€</span></li>
+                    <li><span class="wine-name">Cortes de Cima - 2018</span><span class="wine-price">29€</span></li>
+                    <li><span class="wine-name">Dona Ermelinda - 2022</span><span class="wine-price">12€</span></li>
+                    <li><span class="wine-name">Esporão Reserva - 2019</span><span class="wine-price">38€</span></li>
+                    <li><span class="wine-name">Explicit - 2018</span><span class="wine-price">34€</span></li>
+                    <li><span class="wine-name">Falua - 2018</span><span class="wine-price">38€</span></li>
+                    <li><span class="wine-name">Foral de Évora - 2018</span><span class="wine-price">26€</span></li>
+                    <li><span class="wine-name">Freixo family collection - 2017</span><span class="wine-price">42€</span></li>
+                    <li><span class="wine-name">Freixo Reserva - 2017</span><span class="wine-price">26€</span></li>
+                    <li><span class="wine-name">Herdade do arripiado velho - 2020</span><span class="wine-price">19€</span></li>
+                    <li><span class="wine-name">Herdade do Rocim - 2022</span><span class="wine-price">18€</span></li>
+                    <li><span class="wine-name">Herdade do Rocim - Touriga Nacional 2022</span><span class="wine-price">22€</span></li>
+                    <li><span class="wine-name">Herdade do Sobroso - 2022</span><span class="wine-price">16€</span></li>
+                    <li><span class="wine-name">Herdade do Sobroso Reserva - 2021</span><span class="wine-price">28€</span></li>
+                </ul>
+            </div>
+            <div class="wine-region">
+                <h3>Douro</h3>
+                <ul class="wine-list">
+                    <li><span class="wine-name">Quinta Da Leda - 2018</span><span class="wine-price">49€</span></li>
+                    <li><span class="wine-name">Quinta do Sobreiró - Reserva 2019</span><span class="wine-price">16€</span></li> <li><span class="wine-name">Quinta dos Avidagos - 2017</span><span class="wine-price">27€</span></li>
+                    <li><span class="wine-name">Quinta dos Avidagos Reserva - 2017</span><span class="wine-price">24€</span></li>
+                    <li><span class="wine-name">Quinta Nova - 2022</span><span class="wine-price">45€</span></li>
+                    <li><span class="wine-name">Símbolo - 2016</span><span class="wine-price">16€</span></li>
+                    <li><span class="wine-name">Teoria Reserva - 2019</span><span class="wine-price">14€</span></li>
+                    <li><span class="wine-name">Tons de Duorum - 2020</span><span class="wine-price">14€</span></li>
+                    <li><span class="wine-name">Vale D. Maria - 2021</span><span class="wine-price">22€</span></li>
+                    <li><span class="wine-name">Bota Velha - 2019</span><span class="wine-price">17€</span></li>
+                    <li><span class="wine-name">Busto - 2018</span><span class="wine-price">16€</span></li>
+                    <li><span class="wine-name">Castello De Numão - 2020</span><span class="wine-price">14€</span></li>
+                    <li><span class="wine-name">Cortes Do Tua - 2022</span><span class="wine-price">26€</span></li>
+                    <li><span class="wine-name">Duorum Colheita - 2021</span><span class="wine-price">14€</span></li>
+                    <li><span class="wine-name">Entre Serras - 2018</span><span class="wine-price">14€</span></li>
+                    <li><span class="wine-name">Esteva - 2021</span><span class="wine-price">26€</span></li>
+                    <li><span class="wine-name">Família Silva Branco - 2017</span><span class="wine-price">22€</span></li>
+                    <li><span class="wine-name">Flor de Mapa - 2018</span><span class="wine-price">35€</span></li>
+                    <li><span class="wine-name">Grainha - 2021</span><span class="wine-price">14€</span></li>
+                    <li><span class="wine-name">Lua Cheia - 2020</span><span class="wine-price">30€</span></li>
+                    <li><span class="wine-name">Mapa - 2015</span><span class="wine-price">24€</span></li>
+                    <li><span class="wine-name">Pacheca - Superior 2022</span><span class="wine-price">14€</span></li>
+                    <li><span class="wine-name">Pacheca - 2022</span><span class="wine-price">16€</span></li>
+                    <li><span class="wine-name">Papa Figos - 2022</span><span class="wine-price">22€</span></li>
+                    <li><span class="wine-name">Pessegueiro Aluzé - 2016</span><span class="wine-price">16€</span></li>
+                    <li><span class="wine-name">Poças - 2020</span><span class="wine-price">24€</span></li>
+                    <li><span class="wine-name">Poças Reserva - 2017</span><span class="wine-price">28€</span></li>
+                    <li><span class="wine-name">Pormenor - 2018</span><span class="wine-price">18€</span></li>
+                    <li><span class="wine-name">Prazo de Roriz - 2018</span><span class="wine-price">26€</span></li>
+                    <li><span class="wine-name">Quinta da Foz - 2019</span><span class="wine-price">26€</span></li>
+                </ul>
+            </div>
+            <div class="wine-region">
+                <h3>Tejo</h3>
+                <ul class="wine-list">
+                    <li><span class="wine-name">Quinta da Alorna - 2019</span><span class="wine-price">12€</span></li>
+                    <li><span class="wine-name">Quinta da Lapa Selection - 2020</span><span class="wine-price">15€</span></li>
+                    <li><span class="wine-name">Conde Vimioso Somelier Edition - 2021</span><span class="wine-price">20€</span></li>
+                    <li><span class="wine-name">Conde Vimioso Colheita Selecionada - 2022</span><span class="wine-price">12€</span></li>
+                    <li><span class="wine-name">Conde Vimioso Reserva - 2020</span><span class="wine-price">29€</span></li>
+                    <li><span class="wine-name">Marquês de Tomar - 2020</span><span class="wine-price">20€</span></li>
+                </ul>
+            </div>
+            <div class="wine-region">
+                <h3>Lisboa</h3>
+                <ul class="wine-list">
+                    <li><span class="wine-name">Quinta de Pancas - 2019</span><span class="wine-price">22€</span></li>
+                    <li><span class="wine-name">Quinta de Pancas Reserva - 2017</span><span class="wine-price">26€</span></li>
+                    <li><span class="wine-name">Pancas - 2018</span><span class="wine-price">14€</span></li>
+                    <li><span class="wine-name">Quinta da Boa Esperança - 2017</span><span class="wine-price">24€</span></li>
+                    <li><span class="wine-name">Dory - 2020</span><span class="wine-price">14€</span></li>
+                </ul>
+            </div>
+            <div class="wine-region">
+                <h3>Dão</h3>
+                <ul class="wine-list">
+                    <li><span class="wine-name">Conde de Anadia - 2018</span><span class="wine-price">16€</span></li>
+                    <li><span class="wine-name">Fonte Do Ouro - 2020</span><span class="wine-price">14€</span></li>
+                    <li><span class="wine-name">Taboadella - 2021</span><span class="wine-price">22€</span></li>
+                </ul>
+            </div>
+            <div class="wine-region">
+                <h3>Setúbal</h3>
+                <ul class="wine-list">
+                    <li><span class="wine-name">Vale da Judia - 2019</span><span class="wine-price">12€</span></li>
+                    <li><span class="wine-name">Dom Campos - 2021</span><span class="wine-price">10€</span></li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>

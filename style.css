@@ -1,0 +1,273 @@
+/* ==========================================================================
+   CHURRASCARIA - V10.0 (FINAL VERSION WITH LANGUAGE SWITCHER)
+   ========================================================================== */
+
+/* ==========================================================================
+   1. CONFIGURAÇÃO, FONTES E ESTILOS BASE
+   ========================================================================== */
+:root {
+  --vermelho: #B93C38;
+  --ouro: #E0C070;
+  --cinza-escuro: #1a1a1a;
+  --cinza-medio: #333;
+  --cinza-claro: #f7f7f7;
+  --branco: #ffffff;
+  --preto-solido: #101010;
+  --font-principal: 'Source Sans Pro', sans-serif;
+  --font-titulos: 'Cormorant Garamond', serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-principal);
+  color: var(--cinza-medio);
+  background-color: var(--preto-solido);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+/* ==========================================================================
+   2. ESTRUTURA E ANIMAÇÕES
+   ========================================================================== */
+.content-wrapper { background-color: var(--branco); }
+.anim-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.anim-reveal.is-visible { opacity: 1; transform: translateY(0); }
+.section { padding: 8rem 4rem; }
+.container { max-width: 960px; margin: 0 auto; padding: 0 1rem; }
+.section-title {
+  font-family: var(--font-titulos);
+  font-size: clamp(2.8rem, 6vw, 4rem);
+  font-weight: 700;
+  color: var(--cinza-escuro);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  line-height: 1.1;
+}
+.section-subtitle {
+  max-width: 650px;
+  margin: 0 auto 3rem auto;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: center;
+}
+/* ==========================================================================
+   3. CABEÇALHO (HEADER) - REDESENHADO
+   ========================================================================== */
+header#pageHeader {
+  display: flex; /* Alterado para flex para centrar o logo */
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 1020;
+  transition: all 0.4s ease;
+  background-color: rgba(18, 18, 18, 0.5);
+}
+header#pageHeader.scrolled {
+  background-color: rgba(18, 18, 18, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.header-left, .header-right {
+  flex: 1; /* Faz com que ambos ocupem o mesmo espaço */
+}
+.header-right {
+    /* Apenas para manter o logo centrado, pode ser usado para um botão no futuro */
+}
+.logo {
+  font-family: var(--font-titulos);
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--branco);
+  text-align: center; /* Centra o logo dentro do seu contentor */
+  flex: 2; /* Dá mais espaço ao logo mas mantém-no centrado */
+}
+
+/* ==========================================================================
+   4. NOVO SELETOR DE IDIOMAS
+   ========================================================================== */
+.language-switcher {
+    position: relative;
+}
+.lang-button {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: var(--branco);
+    font-family: var(--font-principal);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.lang-button:hover {
+    background-color: var(--branco);
+    color: var(--preto-solido);
+}
+.lang-button .fa-chevron-down {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+.lang-menu.active + .lang-button .fa-chevron-down,
+.language-switcher:hover .lang-button .fa-chevron-down {
+    transform: rotate(180deg);
+}
+.lang-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background-color: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    list-style: none;
+    padding: 0.5rem;
+    border-radius: 6px;
+    width: 150px;
+    z-index: 1021;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+.lang-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.lang-menu li {
+    margin: 0;
+}
+.lang-menu a {
+    display: block;
+    color: var(--branco);
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+.lang-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.lang-menu a.active {
+    font-weight: bold;
+    color: var(--ouro);
+}
+
+/* ==========================================================================
+   5. SECÇÕES PRINCIPAIS (HERO, SOBRE NÓS, ETC)
+   ========================================================================== */
+.hero {
+  position: relative; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--branco); padding: 1rem;
+  overflow: hidden;
+}
+.hero-video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.hero::after { content: ''; position: absolute; inset: 0; z-index: 2; background: rgba(0,0,0,0.5); }
+.hero-content { position: relative; z-index: 3; text-align: center; }
+.hero-content h1 { font-family: var(--font-titulos); font-weight: 700; font-size: clamp(4rem, 12vw, 9rem); line-height: 1; text-shadow: 0 5px 25px rgba(0,0,0,0.5); }
+.hero-content p { font-family: var(--font-principal); font-size: clamp(1rem, 2.5vw, 1.25rem); margin: 1.5rem auto 2.5rem; max-width: 550px; line-height: 1.6; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+
+.about-grid { display: flex; align-items: center; gap: 5rem; }
+.about-grid .text-content { flex: 1.2; }
+.about-grid .text-content p span { font-family: var(--font-titulos); color: var(--vermelho); font-size: 4.5rem; float: left; line-height: 0.8; margin-right: 0.8rem; margin-top: 0.5rem; }
+.about-grid .image-content { flex: 1; }
+.about-grid .image-content img { width: 100%; height: auto; display: block; }
+
+.video-section { position: relative; height: 70vh; display: flex; align-items: center; justify-content: center; color: var(--branco); text-align: center; padding: 2rem; overflow: hidden; background-color: var(--preto-solido); }
+.video-section-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; opacity: 0.7; }
+.video-section-overlay { display: none; }
+.video-section-content { position: relative; z-index: 3; }
+.video-section .section-title { color: var(--branco); text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+.video-section p { font-size: 1.2rem; line-height: 1.8; max-width: 600px; margin: 0 auto; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+
+/* ==========================================================================
+   6. SECÇÃO 'MENU SHOWCASE'
+   ========================================================================== */
+#menu { display: flex; flex-direction: column; }
+.menu-showcase-panel { position: relative; min-height: 90vh; display: flex; align-items: center; justify-content: center; color: var(--branco); text-align: center; padding: 4rem; overflow: hidden; }
+.panel-bg-parallax { position: absolute; inset: -5%; background-position: center; background-size: cover; background-attachment: fixed; transition: transform 0.6s ease; }
+.menu-showcase-panel:hover .panel-bg-parallax { transform: scale(1.03); }
+.menu-showcase-panel::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.55); z-index: 2; }
+.panel-content { position: relative; z-index: 3; max-width: 900px; }
+.panel-content h2 { font-family: var(--font-titulos); font-size: clamp(3.5rem, 8vw, 7rem); text-transform: uppercase; line-height: 1; text-shadow: 0 4px 20px rgba(0,0,0,0.5); white-space: nowrap; }
+.panel-content p { font-size: 1.1rem; margin-top: 1rem; line-height: 1.6; text-shadow: 0 2px 10px rgba(0,0,0,0.7); }
+
+/* ==========================================================================
+   7. SECÇÃO EVENTOS - CARROSSEL CORRIGIDO
+   ========================================================================== */
+.event-carousel-wrapper { max-width: 900px; margin: 0 auto; position: relative; }
+/* FORÇAR ALINHAMENTO CENTRAL DOS FILHOS */
+.container.text-center { display: flex; flex-direction: column; align-items: center; }
+.event-carousel { display: flex; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-behavior: smooth; border-radius: 4px; overflow: hidden; width: 100%; }
+.event-carousel::-webkit-scrollbar { display: none; }
+.carousel-slide { flex: 0 0 100%; width: 100%; scroll-snap-align: center; aspect-ratio: 16 / 9; }
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+.carousel-dots { display: flex; justify-content: center; gap: 12px; margin-top: 1.5rem; }
+.carousel-dot { width: 10px; height: 10px; background-color: #ccc; border-radius: 50%; cursor: pointer; border: none; transition: all 0.3s ease; }
+.carousel-dot:hover { transform: scale(1.2); }
+.carousel-dot.active { background-color: var(--vermelho); }
+.carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.4); color: white; border: none; border-radius: 50%; width: 44px; height: 44px; font-size: 20px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+.carousel-arrow:hover { background-color: rgba(0, 0, 0, 0.7); transform: translateY(-50%) scale(1.1); }
+.carousel-arrow.prev { left: 1.5rem; }
+.carousel-arrow.next { right: 1.5rem; }
+
+/* ... (resto do CSS permanece igual) ... */
+.btn { display: inline-block; padding: 1rem 2.5rem; font-family: var(--font-principal); font-weight: 600; font-size: 1rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 50px; border: 1px solid transparent; cursor: pointer; transition: all 0.3s ease; text-align: center; }
+.btn-reserva { background-color: var(--branco); color: var(--preto-solido); border-color: var(--branco); }
+.btn-reserva:hover { background-color: transparent; color: var(--branco); }
+.btn-primary { background-color: var(--vermelho); color: var(--branco); border-color: var(--vermelho); }
+.btn-primary:hover { background-color: #9d3330; border-color: #9d3330; transform: translateY(-2px); }
+footer#pageFooterBottom { background-color: var(--cinza-claro); margin-top: 0; }
+.footer-bottom { background-color: var(--cinza-escuro); color: rgba(255, 255, 255, 0.5); text-align: center; padding: 2rem 0; font-size: 0.9rem; }
+.modal-overlay { display: none; position: fixed; inset: 0; background-color: rgba(18, 18, 18, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 2000; align-items: center; justify-content: center; padding: 1rem; overflow-y: auto; }
+.modal-content { position: relative; background-color: var(--preto-solido); color: var(--cinza-claro); padding: 2.5rem; border-radius: 8px; max-width: 520px; width: 95%; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); animation: modal-fade-in 0.4s ease-out; }
+@keyframes modal-fade-in { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.close-modal { position: absolute; top: 15px; right: 20px; font-size: 2.5rem; font-weight: 300; color: rgba(255, 255, 255, 0.5); cursor: pointer; transition: all 0.3s ease; }
+.close-modal:hover { color: var(--branco); transform: rotate(90deg) scale(1.1); }
+.modal-title { font-family: var(--font-titulos); font-size: 2.2rem; font-weight: 700; color: var(--branco); margin-bottom: 0.5rem; text-align: center; }
+.modal-subtitle { text-align: center; margin-bottom: 2rem; color: rgba(255, 255, 255, 0.7); }
+.form-group { margin-bottom: 1.25rem; }
+.form-group-inline { display: flex; gap: 1.25rem; }
+.form-group-inline .form-group { flex: 1; }
+.form-group label { display: block; font-family: var(--font-principal); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(255, 255, 255, 0.8); }
+.form-group input, .form-group select { width: 100%; padding: 0.9rem 1rem; background-color: #222; border: 1px solid #444; border-radius: 4px; color: var(--branco); font-family: var(--font-principal); font-size: 1rem; transition: all 0.3s ease; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--ouro); background-color: var(--preto-solido); box-shadow: 0 0 0 3px rgba(224, 192, 112, 0.5); }
+.modal-btn { width: 100%; padding: 1.1rem; margin-top: 1rem; border-radius: 4px; background-color: var(--vermelho); border-color: var(--vermelho); }
+.success-content { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.checkmark-svg { width: 120px; height: 120px; stroke-width: 3; stroke: #4CAF50; margin: 1rem auto; }
+.checkmark-circle { stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 2; stroke: #4CAF50; fill: none; animation: stroke-check 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.2s forwards; }
+.checkmark-check { transform-origin: 50% 50%; stroke-dasharray: 48; stroke-dashoffset: 48; animation: stroke-check 0.3s cubic-bezier(0.65, 0, 0.45, 1) 1s forwards; }
+@keyframes stroke-check { 100% { stroke-dashoffset: 0 } }
+#whatsapp-widget { position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; background-color: #25D366; color: #FFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); z-index: 1000; transition: transform 0.2s ease-in-out; text-decoration: none; }
+#whatsapp-widget:hover { transform: scale(1.1); }
+@media (max-width: 900px) { .about-grid { flex-direction: column; gap: 2rem; } .section { padding: 6rem 2rem; } }
+@media (max-width: 767px) {
+    .section { padding: 4rem 1.5rem; }
+    header#pageHeader { padding: 1.5rem 1rem; }
+    .logo { flex: unset; position: static; transform: none; } /* Devolve o logo ao fluxo normal */
+    .header-left { flex: 1; justify-content: flex-start; }
+    .header-right { flex: 1; }
+    body { background-attachment: scroll; }
+    .panel-bg-parallax { background-attachment: scroll; }
+    .menu-showcase-panel { min-height: 70vh; padding: 2rem; }
+    .panel-content h2 { white-space: normal; }
+    .carousel-arrow { display: none; }
+}
+
+/* Garante que os pontos do carrossel estão perfeitamente centrados */
+.carousel-dots {
+    width: 100%; /* Garante que o contentor ocupa todo o espaço */
+    display: flex;
+    justify-content: center; /* Centra os pontos dentro do contentor */
+    gap: 12px;
+    margin-top: 1.5rem;
+}
